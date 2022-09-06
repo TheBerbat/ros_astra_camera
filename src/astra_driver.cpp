@@ -187,7 +187,7 @@ void AstraDriver::advertiseROSTopics()
     //image_transport::SubscriberStatusCallback itssc = boost::bind(&AstraDriver::colorConnectCb, this);
     //ros::SubscriberStatusCallback rssc = boost::bind(&AstraDriver::colorConnectCb, this);
     //pub_color_ = color_it.advertiseCamera("image", 1, itssc, itssc, rssc, rssc);
-    pub_color_ = nh_->create_publisher<sensor_msgs::msg::Image>("image", rclcpp::QoS(rclcpp::KeepLast(5), rmw_qos_profile_sensor_data));
+    pub_color_ = nh_->create_publisher<sensor_msgs::msg::Image>("image", rclcpp::QoS(rclcpp::KeepLast(5)));
     this->colorConnectCb();
   }
 
@@ -196,7 +196,7 @@ void AstraDriver::advertiseROSTopics()
     //image_transport::SubscriberStatusCallback itssc = boost::bind(&AstraDriver::irConnectCb, this);
     //ros::SubscriberStatusCallback rssc = boost::bind(&AstraDriver::irConnectCb, this);
     //pub_ir_ = ir_it.advertiseCamera("image", 1, itssc, itssc, rssc, rssc);
-    pub_ir_ = nh_->create_publisher<sensor_msgs::msg::Image>("ir_image", rclcpp::QoS(rclcpp::KeepLast(5), rmw_qos_profile_sensor_data));
+    pub_ir_ = nh_->create_publisher<sensor_msgs::msg::Image>("ir_image", rclcpp::QoS(rclcpp::KeepLast(5)));
     this->irConnectCb();
   }
 
@@ -207,8 +207,8 @@ void AstraDriver::advertiseROSTopics()
     //ros::SubscriberStatusCallback rssc = boost::bind(&AstraDriver::depthConnectCb, this);
     //pub_depth_raw_ = depth_it.advertiseCamera("image_raw", 1, itssc, itssc, rssc, rssc);
     //pub_depth_ = depth_raw_it.advertiseCamera("image", 1, itssc, itssc, rssc, rssc);
-    pub_depth_raw_ = nh_->create_publisher<sensor_msgs::msg::Image>("depth", rclcpp::QoS(rclcpp::KeepLast(5), rmw_qos_profile_sensor_data));
-    pub_depth_camera_info_ = nh_->create_publisher<sensor_msgs::msg::CameraInfo>("depth_camera_info", rclcpp::QoS(rclcpp::KeepLast(5), rmw_qos_profile_sensor_data));
+    pub_depth_raw_ = nh_->create_publisher<sensor_msgs::msg::Image>("depth", rclcpp::QoS(rclcpp::KeepLast(5)));
+    pub_depth_camera_info_ = nh_->create_publisher<sensor_msgs::msg::CameraInfo>("depth_camera_info", rclcpp::QoS(rclcpp::KeepLast(5)));
     this->depthConnectCb();
   }
 
