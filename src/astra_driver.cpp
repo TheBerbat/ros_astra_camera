@@ -753,9 +753,11 @@ void AstraDriver::readConfigFromParameterServer()
 {
   // Load frame name parameters
   // TODO(Kukanani): reinstate ir_frame_id_ as listed in the commented section below
+  pnh_->declare_parameter("depth_frame_id", depth_frame_id_);
   pnh_->get_parameter("depth_frame_id", depth_frame_id_);
   ROS_INFO_STREAM("Using depth frame id " << depth_frame_id_);
 
+  pnh_->declare_parameter("color_frame_id", color_frame_id_);
   pnh_->get_parameter("color_frame_id", color_frame_id_);
   ROS_INFO_STREAM("Using color frame id " << color_frame_id_);
 
@@ -778,6 +780,7 @@ void AstraDriver::readConfigFromParameterServer()
 
   // Load the depth registration parameter, which may have been set before
   //   driver initialization.
+  pnh_->declare_parameter("depth_registration", depth_registration_);
   pnh_->get_parameter("depth_registration", depth_registration_);
   if(depth_registration_)
   {

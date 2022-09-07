@@ -129,31 +129,30 @@ int main(int argc, char **argv){
 
   rclcpp::init(argc, argv);
   rclcpp::Node::SharedPtr n = rclcpp::Node::make_shared("astra_camera");
-  rclcpp::Node::SharedPtr pnh = rclcpp::Node::make_shared("astra_camera_");
 
   rcl_interfaces::msg::ParameterDescriptor use_ir_description;
   use_ir_description.name = "use_ir";
   use_ir_description.type = rcl_interfaces::msg::ParameterType::PARAMETER_BOOL;
   use_ir_description.description = "Should use IR camera";
   use_ir_description.read_only = false;
-  use_ir = pnh->declare_parameter("use_ir", use_ir, use_ir_description);
+  use_ir = n->declare_parameter("use_ir", use_ir, use_ir_description);
   
   rcl_interfaces::msg::ParameterDescriptor use_color_description;
   use_color_description.name = "use_color";
   use_color_description.type = rcl_interfaces::msg::ParameterType::PARAMETER_BOOL;
   use_color_description.description = "Should use color camera";
   use_color_description.read_only = false;
-  use_color = pnh->declare_parameter("use_color", use_color, use_color_description);
+  use_color = n->declare_parameter("use_color", use_color, use_color_description);
   
   rcl_interfaces::msg::ParameterDescriptor use_depth_description;
   use_depth_description.name = "use_depth";
   use_depth_description.type = rcl_interfaces::msg::ParameterType::PARAMETER_BOOL;
   use_depth_description.description = "Should use depth camera";
   use_depth_description.read_only = false;
-  use_depth = pnh->declare_parameter("use_depth", use_depth, use_depth_description);
+  use_depth = n->declare_parameter("use_depth", use_depth, use_depth_description);
 
 
-  astra_wrapper::AstraDriver drv(n, pnh, width, height, framerate, dwidth, dheight, dframerate, dformat);
+  astra_wrapper::AstraDriver drv(n, n, width, height, framerate, dwidth, dheight, dframerate, dformat);
 
   rclcpp::spin(n);
 
